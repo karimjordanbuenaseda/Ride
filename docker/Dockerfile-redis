@@ -1,0 +1,15 @@
+FROM library/redis:7.0
+
+LABEL vendor=""
+LABEL description="Redis server bound to localhost"
+LABEL version="1.0"
+LABEL contact=""
+
+# Copy custom redis.conf if you need additional configuration
+COPY ./docker/redis/redis.conf /usr/local/etc/redis/redis.conf
+
+# Expose port on localhost only
+EXPOSE 6379
+
+# Start Redis with binding to all interfaces within the container
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]

@@ -1,0 +1,27 @@
+# Use the official Python 3.10 image as a base
+FROM python:3.6
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies required for AWS CLI and your script
+RUN apt-get update && apt-get install -y \
+    curl \
+    unzip \
+    psmisc \
+    python3-dev
+
+# Set the working directory in the container
+WORKDIR /var/www/app
+
+# Copy the Python requirements file into the container
+COPY src/requirements.txt /var/www/app/
+
+# Install Python dependencies
+RUN pip install -r requirements.txt --no-cache-dir
+
+# Copy your application code
+COPY src/ ./
+
+# Expose the port the app runs on
+EXPOSE 8080

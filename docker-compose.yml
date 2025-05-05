@@ -1,0 +1,75 @@
+version: "3"
+name: rider-app
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile-app
+    container_name: rider-django-app
+    # command: ["sh", "-c", "cd /var/www/app/src && python3 ride/manage.py collectstatic --noinput && ride/python3 manage.py runserver 0.0.0.0:8080"]
+    command: /bin/bash -c "cd /var/www/app/src && python ride/manage.py migrate && python ride/manage.py runserver 0.0.0.0:8080 || sleep 100000"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/var/www/app
+    working_dir: /var/www/app
+    depends_on:
+      - postgres
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "20"
+    networks:
+      - db_network
+      - web_network
+  
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-psql
+    env_file:
+      - ./docker/assets/docker.env
+    ports:
+      - "3001:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rideuser -d ridedb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    container_name: rider-postgres
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "20"
+    networks:
+      - db_network
+      - web_network
+
+  redis:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    expose:
+    - "6379"
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "20"
+    networks:
+    - db_network
+    - web_network
+
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
+volumes:
+  postgres_data:
