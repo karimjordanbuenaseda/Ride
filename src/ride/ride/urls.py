@@ -28,14 +28,20 @@ admin.autodiscover()
 
 router = routers.SimpleRouter()
 # Register your viewsets here
-router.register(r'ride', RideViewSet)
+router.register(r'rides', RideViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'ride-events', RideEventViewSet)
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+
+    # jwt authentication and generation
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    # user registration
     path('api/register/', register_user, name='register_user'),
     re_path(r'^api/', include(router.urls)),
 ]
