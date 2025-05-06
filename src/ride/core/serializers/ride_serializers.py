@@ -25,8 +25,6 @@ class RideSerializer(CoreModelSerializer):
 
 
     def get_todays_ride_events(self, obj):
-        # This method will be used by the viewset to optimize the query
-        # The actual implementation will depend on prefetched data
         twenty_four_hours_ago = timezone.now() - timedelta(hours=24)
         events = obj.ride_events.filter(created_at__gte=twenty_four_hours_ago)
         return RideEventSerializer(events, many=True).data
