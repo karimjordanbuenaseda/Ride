@@ -6,7 +6,7 @@ from core.models.user import User
 
 class RideEventSerializer(CoreModelSerializer):
 
-    id_ride = serializers.PrimaryKeyRelatedField(queryset=Ride.objects.all(), source='ride')
+    id_ride = serializers.PrimaryKeyRelatedField(queryset=Ride.objects.all())
     
     class Meta:
         model = RideEvent
