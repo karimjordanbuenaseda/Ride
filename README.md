@@ -86,7 +86,7 @@ This API uses JSON Web Token (JWT) authentication for secure access. JWT provide
    ```
 
 2. **Obtaining Tokens**:
-    ![Token](./screenshots/token.jpg "Token")
+    ![Token](https://github.com/karimjordanbuenaseda/Ride/blob/main/screenshots/token.jpg "Token")
    ```bash
    curl -X POST http://localhost:8080/api/token/ \
      -H "Content-Type: application/json" \
@@ -101,7 +101,7 @@ This API uses JSON Web Token (JWT) authentication for secure access. JWT provide
    ```
 
 3. **Using the Access Token**:
-   ![Ride Listing](./screenshots/ride_list.jpg "Ride Listing")
+   ![Ride Listing](https://github.com/karimjordanbuenaseda/Ride/blob/main/screenshots/ride_list.jpg "Ride Listing")
    ```bash
    curl -X GET http://localhost:8080/api/rides/ \
      -H "Authorization: Bearer eyJ0eXAiOiJKV...long token here..."
@@ -227,7 +227,7 @@ This query:
 
 
 ## DB Queries Count
-![DB Queries](./screenshots/db_queries.jpg "DB Queries")
+![DB Queries](https://github.com/karimjordanbuenaseda/Ride/blob/main/screenshots/db_queries.jpg "DB Queries")
 
 ## License
 
