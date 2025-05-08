@@ -15,6 +15,7 @@ A RESTful API built with Django REST Framework for managing ride information, in
 1. Clone the repository
    ```bash
    git clone https://github.com/karimjordanbuenaseda/Ride.git
+   cd ride-management-api
    ```
 
 2. Start the Docker containers
@@ -37,16 +38,17 @@ The application includes a Django management command `init_data` to initialize t
 
 ```bash
 # Initialize all data (users, rides, ride events)
-python manage.py init_data
+python [manage.py](http://_vscodecontentref_/0) init_data
 
 # Clean existing data before initializing new data
-python manage.py init_data --clean
+python [manage.py](http://_vscodecontentref_/1) init_data --clean
 
 # Full clean and re-initialize
-python manage.py init_data --full
+python [manage.py](http://_vscodecontentref_/2) init_data --full
 
 # Only recreate rides and ride events (preserving users)
-python manage.py init_data --rides
+python [manage.py](http://_vscodecontentref_/3) init_data --rides
+```
 
 ### Stopping the Application
 
