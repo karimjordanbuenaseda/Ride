@@ -29,7 +29,7 @@ admin.autodiscover()
 
 router = routers.SimpleRouter()
 # Register your viewsets here
-router.register(r'rides', RideViewSet)
+router.register(r'rides', RideViewSet, basename='rides')
 router.register(r'users', UserViewSet)
 router.register(r'ride-events', RideEventViewSet)
 
