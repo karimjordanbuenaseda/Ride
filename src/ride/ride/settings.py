@@ -212,7 +212,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'your-secret-key',  # Replace with your actual secret key or use SECRET_KEY
+    'SIGNING_KEY': 'your-secret-key',
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,

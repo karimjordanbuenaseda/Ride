@@ -46,26 +46,7 @@ services:
     networks:
       - db_network
       - web_network
-
-  redis:
-    build: 
-      context: .
-      dockerfile: docker/Dockerfile-redis
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    expose:
-    - "6379"
-    logging:
-      options:
-        max-size: "100k"
-        max-file: "20"
-    networks:
-    - db_network
-    - web_network
-
+      
 networks:
   db_network:
     driver: bridge

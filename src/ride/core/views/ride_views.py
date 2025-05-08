@@ -91,6 +91,7 @@ class RideViewSet(viewsets.ModelViewSet):
                     # Let the ordering filter handle this
                     if self.request.query_params.get('ordering') == 'distance_to_pickup':
                         queryset = queryset.order_by('distance_to_pickup')
+                        
             except (ValueError, TypeError):
                 # If coordinates are invalid, just continue without distance annotation
                 pass
