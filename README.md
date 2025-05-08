@@ -15,7 +15,6 @@ A RESTful API built with Django REST Framework for managing ride information, in
 1. Clone the repository
    ```bash
    git clone https://github.com/karimjordanbuenaseda/Ride.git
-   cd ride-management-api
    ```
 
 2. Start the Docker containers
