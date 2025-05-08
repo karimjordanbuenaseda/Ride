@@ -30,6 +30,25 @@ A RESTful API built with Django REST Framework for managing ride information, in
 
 4. Access the API at `http://localhost:8080/api/`
 
+## Initializing Sample Data
+
+The application includes a Django management command `init_data` to initialize the database with sample data. This is useful for development and testing purposes.
+
+### Usage
+
+```bash
+# Initialize all data (users, rides, ride events)
+python manage.py init_data
+
+# Clean existing data before initializing new data
+python manage.py init_data --clean
+
+# Full clean and re-initialize
+python manage.py] init_data --full
+
+# Only recreate rides and ride events (preserving users)
+python manage.py init_data --rides
+
 ### Stopping the Application
 
 ```bash
