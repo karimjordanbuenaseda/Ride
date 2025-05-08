@@ -86,6 +86,7 @@ This API uses JSON Web Token (JWT) authentication for secure access. JWT provide
    ```
 
 2. **Obtaining Tokens**:
+    ![Token](./screenshots/token.jpg "Token")
    ```bash
    curl -X POST http://localhost:8080/api/token/ \
      -H "Content-Type: application/json" \
@@ -100,6 +101,7 @@ This API uses JSON Web Token (JWT) authentication for secure access. JWT provide
    ```
 
 3. **Using the Access Token**:
+   ![Ride Listing](./screenshots/ride_list.jpg "Ride Listing")
    ```bash
    curl -X GET http://localhost:8080/api/rides/ \
      -H "Authorization: Bearer eyJ0eXAiOiJKV...long token here..."
@@ -222,6 +224,10 @@ This query:
 4. Filters for trips longer than 1 hour
 5. Groups by month and driver name
 6. Returns the count of such trips
+
+
+## DB Queries Count
+![DB Queries](./screenshots/db_queries.jpg "DB Queries")
 
 ## License
 
