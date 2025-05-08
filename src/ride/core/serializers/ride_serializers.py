@@ -10,21 +10,19 @@ class RideSerializer(CoreModelSerializer):
 
     rider = UserSerializer(source='id_rider', read_only=True)
     driver = UserSerializer(source='id_driver', read_only=True)
-    ride_events = RideEventSerializer(many=True, read_only=True)
     todays_ride_events = serializers.SerializerMethodField()
+    distance_to_pickup = serializers.FloatField(read_only=True, required=False)
 
     class Meta:
         model = Ride
         fields = (
-            'id_ride', 'status', 'id_rider', 'id_driver', 
+            'id_ride', 'status', 
             'rider', 'driver',
             'pickup_latitude', 'pickup_longitude', 
             'dropoff_latitude', 'dropoff_longitude', 
-            'pickup_time', 'ride_events', 'todays_ride_events'
+            'pickup_time', 'todays_ride_events', 'distance_to_pickup'
         )
 
 
     def get_todays_ride_events(self, obj):
-        twenty_four_hours_ago = timezone.now() - timedelta(hours=24)
-        events = obj.ride_events.filter(created_at__gte=twenty_four_hours_ago)
-        return RideEventSerializer(events, many=True).data
+        return RideEventSerializer(obj.prefetched_todays_events, many=True).data

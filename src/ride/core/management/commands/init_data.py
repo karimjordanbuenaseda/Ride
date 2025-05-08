@@ -15,6 +15,16 @@ class Command(BaseCommand):
             action='store_true',
             help='Clean existing data before initializing new data',
         )
+        parser.add_argument(
+            '--full',
+            action='store_true',
+            help='Full clean and re-initialize',
+        )
+        parser.add_argument(
+            '--rides',
+            action='store_true',
+            help='Create rides only',
+        )
 
     def handle(self, *args, **kwargs):
         self.stdout.write(self.style.SUCCESS('Starting data initialization...'))
@@ -22,25 +32,38 @@ class Command(BaseCommand):
         # Clean existing data if needed
         if kwargs.get('clean', False):
             self.clean_data()
-        
-        # Create Django users and custom users
-        self.create_users()
-        
-        # Create rides
-        self.create_rides()
-        
-        # Create ride events
-        self.create_ride_events()
+
+        if kwargs.get('rides', False):
+            self.clean_data(rides_only=True)
+
+            # Create rides only
+            self.create_rides()
+            # Create ride events
+            self.create_ride_events()
+        else:
+            # Create Django users and custom users
+            self.create_users()
+            
+            # Create rides
+            self.create_rides()
+            
+            # Create ride events
+            self.create_ride_events()
         
         self.stdout.write(self.style.SUCCESS('Data initialization completed successfully!'))
     
-    def clean_data(self):
+    def clean_data(self, rides_only=False):
         """Clean existing data"""
         self.stdout.write('Cleaning existing data...')
-        RideEvent.objects.all().delete()
-        Ride.objects.all().delete()
-        User.objects.all().delete()
-        DjangoUser.objects.filter(is_superuser=False).delete()
+
+        if rides_only:
+            RideEvent.objects.all().delete()
+            Ride.objects.all().delete()
+        else:
+            RideEvent.objects.all().delete()
+            Ride.objects.all().delete()
+            User.objects.all().delete()
+            DjangoUser.objects.filter(is_superuser=False).delete()
         self.stdout.write(self.style.SUCCESS('Existing data cleaned.'))
     
     def create_users(self):

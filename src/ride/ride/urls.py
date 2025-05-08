@@ -23,6 +23,7 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 from core.views import *
+import debug_toolbar
 
 admin.autodiscover()
 
@@ -43,5 +44,7 @@ urlpatterns = [
 
     # user registration
     path('api/register/', register_user, name='register_user'),
+    path('__debug__/', include(debug_toolbar.urls)),
+
     re_path(r'^api/', include(router.urls)),
 ]
