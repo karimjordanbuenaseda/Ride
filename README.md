@@ -43,7 +43,7 @@ python manage.py init_data
 python manage.py init_data --clean
 
 # Full clean and re-initialize
-python manage.py] init_data --full
+python manage.py init_data --full
 
 # Only recreate rides and ride events (preserving users)
 python manage.py init_data --rides
