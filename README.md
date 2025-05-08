@@ -50,7 +50,7 @@ python manage.py init_data --full
 python manage.py init_data --rides
 ```
 
-# What the Command Does
+### What the Command Does
 The init_data command performs the following functions:
 
 1. User Creation: Creates sample users with different roles:
