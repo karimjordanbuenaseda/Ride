@@ -38,17 +38,41 @@ The application includes a Django management command `init_data` to initialize t
 
 ```bash
 # Initialize all data (users, rides, ride events)
-python [manage.py](http://_vscodecontentref_/0) init_data
+python manage.py init_data
 
 # Clean existing data before initializing new data
-python [manage.py](http://_vscodecontentref_/1) init_data --clean
+python manage.py init_data --clean
 
 # Full clean and re-initialize
-python [manage.py](http://_vscodecontentref_/2) init_data --full
+python manage.py init_data --full
 
 # Only recreate rides and ride events (preserving users)
-python [manage.py](http://_vscodecontentref_/3) init_data --rides
+python manage.py init_data --rides
 ```
+
+# What the Command Does
+The init_data command performs the following functions:
+
+1. User Creation: Creates sample users with different roles:
+
+- 1 admin user
+- 5 drivers
+- 10 riders
+2. Ride Creation: Creates 30 sample rides with:
+
+- Random statuses ('pending', 'en-route', 'pickup', 'dropoff', 'completed', 'cancelled')
+- Random pickup and dropoff coordinates
+- Random pickup times within +/- 3 days from current time
+- Assigned to random drivers and riders
+3. Ride Event Creation: Creates 2-5 events for each ride with descriptions such as:
+
+- "Ride requested"
+- "Driver assigned"
+- "Driver en-route to pickup"
+- "Driver arrived at pickup location"
+- "Ride started"
+- "Approaching destination"
+- "Ride completed"
 
 ### Stopping the Application
 
